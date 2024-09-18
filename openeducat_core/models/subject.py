@@ -191,3 +191,45 @@ class WeeklySubjectAssignments(models.Model):
     week_51 = fields.Float('Week 51', required=False, default=0.0)
     week_52 = fields.Float('Week 52', required=False, default=0.0)
 
+
+# No se usa, pero si lo eliminas anda todo mal.
+
+class CourseMetric(models.Model):
+    _name = "op.course.metric"
+    _description = "Course Metric"
+    _inherit = ['mail.thread']
+
+    name = fields.Char('Metric Name', required=True, tracking=True)
+    course_id = fields.Many2one('op.course', 'Course', required=True, tracking=True)
+    max_grade = fields.Float('Maximum Grade', required=True, tracking=True)
+
+    _sql_constraints = [
+        ('unique_course_metric', 'unique(name, course_id)',
+         'Each course must have unique metrics (assignments, exams, etc.).')
+    ]
+
+
+class CourseMetricStudent(models.Model):
+    _name = "op.course.metric.student"
+    _description = "Grade per Student per Metric"
+    _inherit = ['mail.thread']
+
+    student_id = fields.Many2one('op.student', 'Student', required=True, ondelete="cascade", tracking=True)
+    course_id = fields.Many2one('op.course', 'Course', required=True, ondelete="cascade", tracking=True)
+    metric_id = fields.Many2one('course.metric', 'Metric', required=True, ondelete="cascade", tracking=True)
+    grade = fields.Float('Grade', required=True, tracking=True)
+
+    academic_year_id = fields.Many2one('op.academic.year', 'Academic Year', required=True)
+    academic_term_id = fields.Many2one('op.academic.term', 'Academic Term')
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('submitted', 'Submitted'),
+        ('graded', 'Graded'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled')
+    ], string="State", default="draft", tracking=True)
+
+    _sql_constraints = [
+        ('unique_student_metric', 'unique(student_id, course_id, metric_id, academic_year_id)',
+         'The student must have a unique grade for each metric, course, and academic year.')
+    ]

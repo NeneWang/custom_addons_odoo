@@ -38,13 +38,13 @@
                   action="act_op_subject_grade_student_view"
                   groups="openeducat_core.group_op_back_office_admin,openeducat_core.group_op_faculty"/>
 
-        <menuitem id="weekly_subject_assignments_menu"
-                  name="Weekly Subject Assignments"
-                  parent="openeducat_core.menu_op_general_student"
-                  sequence="50"
+<!--        <menuitem id="weekly_subject_assignments_menu"-->
+<!--                  name="Weekly Subject Assignments"-->
+<!--                  parent="openeducat_core.menu_op_general_student"-->
+<!--                  sequence="50"-->
 
-                  action="act_open_weekly_subject_assignments_view"
-                  groups="openeducat_core.group_op_back_office_admin,openeducat_core.group_op_faculty"/>
+<!--                  action="act_open_weekly_subject_assignments_view"-->
+<!--                  groups="openeducat_core.group_op_back_office_admin,openeducat_core.group_op_faculty"/>-->
 
 
 

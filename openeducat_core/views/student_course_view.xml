@@ -27,13 +27,13 @@
             <field name="arch" type="xml">
                 <form string="Student Course Detail Create/Edit">
                     <header>
-                        <field name="state" widget="statusbar"/>
+                            <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
                         <group>
                             <group>
-                                <field name="state"/>
-                                <field name="grade"/>
+                                <field name="state" />
+                                <field name="grade" />
                                 <field name="student_id"/>
                                 <field name="batch_id" domain="[('course_id', '=', course_id)]"/>
                                 <field name="academic_years_id"/>
@@ -107,108 +107,6 @@
 
         </record>
 
-        <record id="view_weekly_subject_assignments_tree" model="ir.ui.view">
-            <field name="name">weekly.subject.assignments.tree</field>
-            <field name="model">weekly.subject.assignments</field>
-            <field name="priority" eval="8"/>
-            <field name="arch" type="xml">
-                <tree string="Weekly Subject Assignments">
-                    <field name="name"/>
-                    <field name="subject_grade_student_id"/>
-                    <field name="week_1" optional="hide"/>
-                    <field name="week_2" optional="hide"/>
-                    <field name="week_3" optional="hide"/>
-                    <field name="week_4" optional="hide"/>
-                    <field name="week_5" optional="hide"/>
-                    <!-- You can continue adding all the weeks as needed -->
-                    <field name="week_52" optional="hide"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="view_weekly_subject_assignments_form" model="ir.ui.view">
-            <field name="name">weekly.subject.assignments.form</field>
-            <field name="model">weekly.subject.assignments</field>
-            <field name="priority" eval="8"/>
-            <field name="arch" type="xml">
-                <form string="Weekly Subject Assignments">
-                    <header>
-                        <!-- You can add a status field if needed -->
-                    </header>
-                    <sheet>
-                        <group>
-                            <group>
-                                <field name="name"/>
-                                <field name="description"/>
-                                <field name="subject_grade_student_id"/>
-                            </group>
-                        </group>
-                        <notebook>
-                            <page string="Weeks" name="weeks">
-                                <group>
-                                    <group>
-                                        <field name="week_1"/>
-                                        <field name="week_2"/>
-                                        <field name="week_3"/>
-                                        <field name="week_4"/>
-                                        <field name="week_5"/>
-                                        <field name="week_6"/>
-                                        <field name="week_7"/>
-                                        <field name="week_8"/>
-                                        <field name="week_9"/>
-                                        <field name="week_10"/>
-                                    </group>
-                                    <group>
-                                        <field name="week_11"/>
-                                        <field name="week_12"/>
-                                        <field name="week_13"/>
-                                        <field name="week_14"/>
-                                        <field name="week_15"/>
-                                        <field name="week_16"/>
-                                        <field name="week_17"/>
-                                        <field name="week_18"/>
-                                        <field name="week_19"/>
-                                        <field name="week_20"/>
-                                        <!-- Continue until week 52 -->
-                                        <field name="week_52"/>
-                                    </group>
-                                </group>
-                            </page>
-                        </notebook>
-                    </sheet>
-
-                </form>
-            </field>
-        </record>
-
-        <record model="ir.actions.act_window" id="act_open_weekly_subject_assignments_view">
-            <field name="name">Weekly Subject Assignments</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">weekly.subject.assignments</field>
-            <field name="binding_view_types">form</field>
-            <field name="view_mode">tree,form,pivot</field>
-            <field name="search_view_id" ref="view_weekly_subject_assignments_search"/>
-        </record>
-
-
-        <record id="view_weekly_subject_assignments_search" model="ir.ui.view">
-            <field name="name">weekly.subject.assignments.search</field>
-            <field name="model">weekly.subject.assignments</field>
-            <field name="priority" eval="8"/>
-            <field name="arch" type="xml">
-                <search string="Weekly Subject Assignments">
-                    <field name="name"/>
-                    <field name="subject_grade_student_id"/>
-                    <field name="week_1"/>
-                    <field name="week_52"/>
-                    <group expand="0" string="Group By...">
-                        <filter string="Subject Grade Student" name="group_by_subject_grade_student_id" domain="[]"
-                                context="{'group_by':'subject_grade_student_id'}"/>
-                        <filter string="Name" name="group_by_name" domain="[]" context="{'group_by':'name'}"/>
-                    </group>
-                </search>
-            </field>
-        </record>
 
 
         <!-- Tree View -->
@@ -219,30 +117,29 @@
             <field name="arch" type="xml">
                 <tree string="Student Grades">
                     <field name="student_id"/>
-
                     <field name="subject_id"/>
                     <field name="course_id"/>
                     <field name="academic_year_id"/>
                     <field name="metric_1" optional="show"/>
                     <field name="metric_2" optional="show"/>
-                    <field name="metric_3" optional="hide"/>
-                    <field name="metric_4" optional="hide"/>
-                    <field name="metric_5" optional="hide"/>
-                    <field name="metric_6" optional="hide"/>
-                    <field name="metric_7" optional="hide"/>
-                    <field name="metric_8" optional="hide"/>
-                    <field name="metric_9" optional="hide"/>
-                    <field name="metric_10" optional="hide"/>
-                    <field name="metric_11" optional="hide"/>
-                    <field name="metric_12" optional="hide"/>
-                    <field name="metric_13" optional="hide"/>
-                    <field name="metric_14" optional="hide"/>
-                    <field name="metric_15" optional="hide"/>
-                    <field name="metric_16" optional="hide"/>
-                    <field name="metric_17" optional="hide"/>
-                    <field name="metric_18" optional="hide"/>
-                    <field name="metric_19" optional="hide"/>
-                    <field name="metric_20" optional="hide"/>
+                    <field name="metric_3"  optional="hide"/>
+                    <field name="metric_4"  optional="hide"/>
+                    <field name="metric_5"  optional="hide"/>
+                    <field name="metric_6"  optional="hide"/>
+                    <field name="metric_7"  optional="hide"/>
+                    <field name="metric_8"  optional="hide"/>
+                    <field name="metric_9"  optional="hide"/>
+                    <field name="metric_10"  optional="hide"/>
+                    <field name="metric_11"  optional="hide"/>
+                    <field name="metric_12"  optional="hide"/>
+                    <field name="metric_13"  optional="hide"/>
+                    <field name="metric_14"  optional="hide"/>
+                    <field name="metric_15"  optional="hide"/>
+                    <field name="metric_16"  optional="hide"/>
+                    <field name="metric_17"  optional="hide"/>
+                    <field name="metric_18"  optional="hide"/>
+                    <field name="metric_19"  optional="hide"/>
+                    <field name="metric_20"  optional="hide"/>
 
                     <field name="academic_term_id" optional="hide"/>
                     <field name="grade" string="Nota Final"/>
@@ -394,14 +291,10 @@
                     <field name="academic_year_id"/>
                     <field name="grade"/>
                     <group expand="0" string="Group By">
-                        <filter string="Student" name="group_by_student_id" domain="[]"
-                                context="{'group_by':'student_id'}"/>
-                        <filter string="Subject" name="group_by_subject_id" domain="[]"
-                                context="{'group_by':'subject_id'}"/>
-                        <filter string="Course" name="group_by_course_id" domain="[]"
-                                context="{'group_by':'course_id'}"/>
-                        <filter string="Academic Year" name="group_by_academic_year_id" domain="[]"
-                                context="{'group_by':'academic_year_id'}"/>
+                        <filter string="Student" name="group_by_student_id" domain="[]" context="{'group_by':'student_id'}"/>
+                        <filter string="Subject" name="group_by_subject_id" domain="[]" context="{'group_by':'subject_id'}"/>
+                        <filter string="Course" name="group_by_course_id" domain="[]" context="{'group_by':'course_id'}"/>
+                        <filter string="Academic Year" name="group_by_academic_year_id" domain="[]" context="{'group_by':'academic_year_id'}"/>
                     </group>
                 </search>
             </field>
