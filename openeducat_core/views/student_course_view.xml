@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_op_student_course_tree" model="ir.ui.view">
+            <field name="name">op.student.course.tree</field>
+            <field name="model">op.student.course</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Student Course Detail">
+                    <field name="student_id"/>
+                    <field name="course_id"/>
+                    <field name="batch_id"/>
+                    <field name="roll_number" optional="hide"/>
+                    <field name="academic_years_id" optional="hide"/>
+                    <field name="academic_term_id" optional="hide"/>
+                    <field name="subject_ids" widget="many2many_tags" optional="hide"/>
+                    <field name="state"/>
+                    <field name="grade"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_op_student_course_form" model="ir.ui.view">
+            <field name="name">op.student.course.form</field>
+            <field name="model">op.student.course</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Student Course Detail Create/Edit">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="state"/>
+                                <field name="grade"/>
+                                <field name="student_id"/>
+                                <field name="batch_id" domain="[('course_id', '=', course_id)]"/>
+                                <field name="academic_years_id"/>
+                            </group>
+                            <group>
+                                <field name="course_id"/>
+                                <field name="roll_number"/>
+                                <field name="academic_term_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Subjects" name="subjects">
+                                <field name="subject_ids" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_op_student_course_search" model="ir.ui.view">
+            <field name="name">op.student.course.search</field>
+            <field name="model">op.student.course</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Student Course">
+                    <field name="student_id"/>
+                    <field name="course_id"/>
+                    <field name="batch_id"/>
+                    <field name="roll_number"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Course" name="group_by_adm_course_id"
+                                domain="[]" context="{'group_by':'course_id'}"/>
+                        <filter string="Batch" name="group_by_adm_batch_id"
+                                domain="[]" context="{'group_by':'batch_id'}"/>
+                        <filter string="Academic Year" name="group_by_adm_academic_years_id"
+                                domain="[]" context="{'group_by':'academic_years_id'}"/>
+                        <filter string="Academic Term" name="group_by_adm_academic_term_id"
+                                domain="[]" context="{'group_by':'academic_term_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="view_op_student_course_pivot" model="ir.ui.view">
+            <field name="name">op.student.course.pivot</field>
+            <field name="model">op.student.course</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <pivot string="Student Course">
+                    <field name="student_id"/>
+                    <field name="course_id" type="row"/>
+                    <field name="batch_id"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_op_student_course_view">
+            <field name="name">Student Course Detail</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.student.course</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="search_view_id" ref="view_op_student_course_search"/>
+
+        </record>
+
+        <record id="view_weekly_subject_assignments_tree" model="ir.ui.view">
+            <field name="name">weekly.subject.assignments.tree</field>
+            <field name="model">weekly.subject.assignments</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Weekly Subject Assignments">
+                    <field name="name"/>
+                    <field name="subject_grade_student_id"/>
+                    <field name="week_1" optional="hide"/>
+                    <field name="week_2" optional="hide"/>
+                    <field name="week_3" optional="hide"/>
+                    <field name="week_4" optional="hide"/>
+                    <field name="week_5" optional="hide"/>
+                    <!-- You can continue adding all the weeks as needed -->
+                    <field name="week_52" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_weekly_subject_assignments_form" model="ir.ui.view">
+            <field name="name">weekly.subject.assignments.form</field>
+            <field name="model">weekly.subject.assignments</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Weekly Subject Assignments">
+                    <header>
+                        <!-- You can add a status field if needed -->
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="subject_grade_student_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Weeks" name="weeks">
+                                <group>
+                                    <group>
+                                        <field name="week_1"/>
+                                        <field name="week_2"/>
+                                        <field name="week_3"/>
+                                        <field name="week_4"/>
+                                        <field name="week_5"/>
+                                        <field name="week_6"/>
+                                        <field name="week_7"/>
+                                        <field name="week_8"/>
+                                        <field name="week_9"/>
+                                        <field name="week_10"/>
+                                    </group>
+                                    <group>
+                                        <field name="week_11"/>
+                                        <field name="week_12"/>
+                                        <field name="week_13"/>
+                                        <field name="week_14"/>
+                                        <field name="week_15"/>
+                                        <field name="week_16"/>
+                                        <field name="week_17"/>
+                                        <field name="week_18"/>
+                                        <field name="week_19"/>
+                                        <field name="week_20"/>
+                                        <!-- Continue until week 52 -->
+                                        <field name="week_52"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_weekly_subject_assignments_view">
+            <field name="name">Weekly Subject Assignments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">weekly.subject.assignments</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="search_view_id" ref="view_weekly_subject_assignments_search"/>
+        </record>
+
+
+        <record id="view_weekly_subject_assignments_search" model="ir.ui.view">
+            <field name="name">weekly.subject.assignments.search</field>
+            <field name="model">weekly.subject.assignments</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Weekly Subject Assignments">
+                    <field name="name"/>
+                    <field name="subject_grade_student_id"/>
+                    <field name="week_1"/>
+                    <field name="week_52"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Subject Grade Student" name="group_by_subject_grade_student_id" domain="[]"
+                                context="{'group_by':'subject_grade_student_id'}"/>
+                        <filter string="Name" name="group_by_name" domain="[]" context="{'group_by':'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <!-- Tree View -->
+        <record id="view_op_subject_grade_student_tree" model="ir.ui.view">
+            <field name="name">op.subject.grade.student.tree</field>
+            <field name="model">op.subject.grade.student</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Student Grades">
+                    <field name="student_id"/>
+
+                    <field name="subject_id"/>
+                    <field name="course_id"/>
+                    <field name="academic_year_id"/>
+                    <field name="metric_1" optional="show"/>
+                    <field name="metric_2" optional="show"/>
+                    <field name="metric_3" optional="hide"/>
+                    <field name="metric_4" optional="hide"/>
+                    <field name="metric_5" optional="hide"/>
+                    <field name="metric_6" optional="hide"/>
+                    <field name="metric_7" optional="hide"/>
+                    <field name="metric_8" optional="hide"/>
+                    <field name="metric_9" optional="hide"/>
+                    <field name="metric_10" optional="hide"/>
+                    <field name="metric_11" optional="hide"/>
+                    <field name="metric_12" optional="hide"/>
+                    <field name="metric_13" optional="hide"/>
+                    <field name="metric_14" optional="hide"/>
+                    <field name="metric_15" optional="hide"/>
+                    <field name="metric_16" optional="hide"/>
+                    <field name="metric_17" optional="hide"/>
+                    <field name="metric_18" optional="hide"/>
+                    <field name="metric_19" optional="hide"/>
+                    <field name="metric_20" optional="hide"/>
+
+                    <field name="academic_term_id" optional="hide"/>
+                    <field name="grade" string="Nota Final"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_op_subject_grade_student_form" model="ir.ui.view">
+            <field name="name">op.subject.grade.student.form</field>
+            <field name="model">op.subject.grade.student</field>
+            <field name="arch" type="xml">
+                <form string="Student Grade">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="student_id"/>
+                                <field name="subject_id"/>
+                                <field name="course_id"/>
+                            </group>
+                            <group>
+                                <field name="academic_year_id"/>
+                                <field name="academic_term_id"/>
+                                <field name="grade"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <!-- Metrics Section -->
+                            <page string="main metrics">
+                                <group>
+
+                                    <group>
+                                        <field name="metric_1"/>
+                                        <field name="metric_label_1"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_2"/>
+                                        <field name="metric_label_2"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Metrics">
+                                <group>
+
+                                    <group>
+                                        <field name="metric_1"/>
+                                        <field name="metric_label_1"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_2"/>
+                                        <field name="metric_label_2"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="metric_3"/>
+                                        <field name="metric_label_3"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_4"/>
+                                        <field name="metric_label_4"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_5"/>
+                                        <field name="metric_label_5"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_6"/>
+                                        <field name="metric_label_6"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_7"/>
+                                        <field name="metric_label_7"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_8"/>
+                                        <field name="metric_label_8"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_9"/>
+                                        <field name="metric_label_9"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_10"/>
+                                        <field name="metric_label_10"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_11"/>
+                                        <field name="metric_label_11"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_12"/>
+                                        <field name="metric_label_12"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_13"/>
+                                        <field name="metric_label_13"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_14"/>
+                                        <field name="metric_label_14"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_15"/>
+                                        <field name="metric_label_15"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_16"/>
+                                        <field name="metric_label_16"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_17"/>
+                                        <field name="metric_label_17"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_18"/>
+                                        <field name="metric_label_18"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_19"/>
+                                        <field name="metric_label_19"/>
+                                    </group>
+                                    <group>
+                                        <field name="metric_20"/>
+                                        <field name="metric_label_20"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_op_subject_grade_student_search" model="ir.ui.view">
+            <field name="name">op.subject.grade.student.search</field>
+            <field name="model">op.subject.grade.student</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Student Grades">
+                    <field name="student_id"/>
+                    <field name="subject_id"/>
+                    <field name="course_id"/>
+                    <field name="academic_year_id"/>
+                    <field name="grade"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Student" name="group_by_student_id" domain="[]"
+                                context="{'group_by':'student_id'}"/>
+                        <filter string="Subject" name="group_by_subject_id" domain="[]"
+                                context="{'group_by':'subject_id'}"/>
+                        <filter string="Course" name="group_by_course_id" domain="[]"
+                                context="{'group_by':'course_id'}"/>
+                        <filter string="Academic Year" name="group_by_academic_year_id" domain="[]"
+                                context="{'group_by':'academic_year_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action to Open the Views -->
+        <record model="ir.actions.act_window" id="act_op_subject_grade_student_view">
+            <field name="name">Student Grades</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.subject.grade.student</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_op_subject_grade_student_search"/>
+        </record>
+    </data>
+</odoo>
