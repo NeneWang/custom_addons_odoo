@@ -67,8 +67,8 @@
 <!--                    <field name="gr_no" optional="hide"/>-->
                     <field name="mobile"  string="Numero de Guardian" optional="show"/>
                     <field name="email" optional="show"/>
-                    <field name="blood_group" optional="hide"/>
-                    <field name="emergency_contact" string="Contacto de Emergencia"/>
+<!--                    <field name="blood_group" optional="hide"/>-->
+                    <field name="emergency_contact" string="Guardian"/>
 <!--                    <field name="nationality"/>-->
                     <field name="lang"/>
                 </tree>
@@ -108,9 +108,9 @@
                                                 <td style="padding-right:10px;">
                                                     <field name="first_name" required="0" placeholder="First Name"/>
                                                 </td>
-<!--                                                <td style="padding-right:10px;">-->
-<!--                                                    <field name="middle_name" placeholder="Middle Name"/>-->
-<!--                                                </td>-->
+                                                <td style="padding-right:10px;">
+                                                    <field name="middle_name" string="alias" placeholder="Middle Name"/>
+                                                </td>
                                                 <td style="padding-right:10px;">
                                                     <field name="last_name" placeholder="Last Name"/>
                                                 </td>
@@ -125,7 +125,7 @@
                                 <group name="personal_detail">
                                     <group>
                                         <field string="Género" name="gender" required="0"/>
-                                        <field  string="Fecha de Nacimiento" name="birth_date" required="1"/>
+                                        <field  string="Fecha de Nacimiento !!" name="birth_date" required="1"/>
                                         <label for="type"/>
                                         <div name="div_type">
                                             <field class="oe_inline" name="type"/>
@@ -143,20 +143,23 @@
                                             <field name="country_id" placeholder="Country" class="oe_no_button"
                                                    options="{&quot;no_open&quot;: True}"/>
                                         </div>
-                                        <field name="emergency_contact" context="{'show_address': 1}"
+                                        <field name="emergency_contact" string="guardian" context="{'show_address': 1}"
                                                options="{&quot;always_reload&quot;: True}"/>
+                                        <field name="additional_guardian" />
                                     </group>
                                     <group>
                                         <field name="email" string="Email del Guardian"  required="0"/>
+
+                                        <field name="wechat" string="WeChat"/>
                                         <field name="mobile" string="Numero Telefonico del Guardian" required="0"/>
                                         <field name="id_number" required="0"/>
                                         <field name="lang"/>
-                                        <field name="blood_group" string="Grupo Sanguineo"/>
-<!--                                        <field name="nationality"/>-->
+<!--                                        <field name="blood_group" string="Grupo Sanguineo"/>-->
+                                        <field name="nationality"/>
 <!--                                        <field name="visa_info"/>-->
 <!--                                        <field name="category_id"/>-->
                                         <field name="user_id" string="User" readonly="1"/>
-                                        <field name="partner_id" string="Guardian" placeholder="Usuario Guardian (si existe)" required="0"/>
+<!--                                        <field name="partner_id" string="Guardian" placeholder="Usuario Guardian (si existe)" required="0"/>-->
                                     </group>
                                     <separator string="miscellaneous" colspan="2"/>
                                         <group colspan="3">
@@ -202,7 +205,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">op.student</field>
             <field name="binding_view_types">form</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="search_view_id" ref="view_op_student_search"/>
             <field name="domain">[]</field>
             <field name="context">{}</field>
@@ -234,7 +237,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">op.student</field>
             <field name="binding_view_types">form</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="search_view_id" ref="view_op_student_search"/>
             <field name="domain">[]</field>
             <field name="context">{}</field>

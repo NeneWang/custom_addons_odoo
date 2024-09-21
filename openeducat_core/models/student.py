@@ -113,7 +113,7 @@ class OpStudent(models.Model):
     _inherits = {"res.partner": "partner_id"}
 
     first_name = fields.Char('First Name',  translate=True)
-    middle_name = fields.Char('Middle Name', translate=True)
+    middle_name = fields.Char('Alias Chino')
     last_name = fields.Char('Last Name', translate=True)
     birth_date = fields.Date('Birth Date')
     blood_group = fields.Selection([
@@ -132,8 +132,10 @@ class OpStudent(models.Model):
         ('o', 'Other')
     ], 'Gender', required=True, default='m')
     nationality = fields.Many2one('res.country', 'Nationality')
-    emergency_contact = fields.Many2one('res.partner', 'Emergency Contact')
+    emergency_contact = fields.Many2one('res.partner', 'Guardian Principal')
+    additional_guardian = fields.Char('Guardian Adicional Informacion', size=64)
     visa_info = fields.Char('Visa Info', size=64)
+    wechat = fields.Char('We chat', size=64)
     id_number = fields.Char('ID Card Number', size=64)
     partner_id = fields.Many2one('res.partner', 'Partner',
                                  required=True, ondelete="cascade")
